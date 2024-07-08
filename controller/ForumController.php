@@ -46,7 +46,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function addCategory() {
         
         if(isset($_POST['submit'])){
-            $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $nameCategory = filter_input(INPUT_POST, "nameCategory", FILTER_SANITIZE_SPECIAL_CHARS);
 
         }
         // $topicManager = new TopicManager();
@@ -61,5 +61,6 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "categories" => []
             ]
         ];
+          $this->redirectTo("forum", "index");
     }
 }
