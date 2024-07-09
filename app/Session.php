@@ -3,6 +3,8 @@ namespace App;
 
 class Session{
 
+    // Les propriétés statiques permettent de partager des données entre toutes les instances d'une classe. et qui ne dépendent pas d'instances spécifiques de classes
+
     private static $categories = ['error', 'success'];
 
     /**

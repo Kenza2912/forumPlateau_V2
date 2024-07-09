@@ -12,13 +12,13 @@ foreach($categories as $category ){ ?>
 
 
 
-<!-- Pour rajouter une nouvelle catégorie à la base de données -->
+<!-- Formulaire pour rajouter une nouvelle catégorie à la base de données -->
   
 <form  action="index.php?ctrl=forum&action=addCategory" method="post">
 <p>
     <label>
-        Nom de la catégorie 
-        <input type="text" name="name">
+        Ajouter une catégorie 
+        <input type="text" name="nameCategory">
     </label>
 </p>
 
