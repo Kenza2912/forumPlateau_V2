@@ -92,8 +92,8 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     // méthode pour rajouter un topic à la base de données
     public function addTopicByCategory($id){
+
         // Vérifie si le formulaire a été soumis
-        
         if (isset($_POST['submit'])) {
             // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres. FILTER_SANITIZE_SPECIAL_CHARS permet d'afficher la chaîne en toute sécurité dans un contexte HTML sans exécuter de code malveillant inséré par un utilisateur.
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -107,17 +107,17 @@ class ForumController extends AbstractController implements ControllerInterface{
         //  Pour vérifier
         //  var_dump($title);
 
-         // récupérer tous les topics d'une catégorie spécifique (par son id)
+         // récupére tous les topics d'une catégorie spécifique (par son id)
          $topics = $topicManager->findTopicsByCategory($id);
-         var_dump($topicId);
+        //  var_dump($topicId);
         //  $topicId = $topic->getId();
 
-         // récupérer les catégories spécifique (par son id)
+         // récupére les catégories spécifique (par son id)
          $category = $categoryManager->findOneById($id);
          $categoryId = $category->getId();
-         var_dump($categoryId);
+        //  var_dump($categoryId);
  
-         var_dump($creationDate);
+        //  var_dump($creationDate);
          $userId =1;
 
         // vérifier si chaque variable contient une valeur jugée positive par PHP
@@ -174,6 +174,25 @@ class ForumController extends AbstractController implements ControllerInterface{
         }
 
     }
+
+    public function listPostsByTopic($id) {
+        $postManager = new PostManager();
+        $topicManager = new TopicManager();
+
+        $posts = $postManager->findPostsByTopic($id);
+        $topic = $topicManager->findOneById($id);
+
+        return [
+            "view" => VIEW_DIR."forum/detailTopic.php",
+            "meta_description" => "Liste des posts par topic : ".$topic,
+            "data" => [
+               "posts" => $posts,
+                "topic" => $topic
+            ]
+        ];
+    }
+
+
 
     
 }
