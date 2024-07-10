@@ -13,9 +13,7 @@ foreach($topics as $topic ){ ?>
 
 
 <!-- Formulaire pour rajouter un nouveau topic à la base de données -->
-
-
-      
+ 
 
  <form action="index.php?ctrl=forum&action=addTopicByCategory&id=<?=$category->getId()?>" method="POST">
     <div class="uk-margin">
@@ -31,7 +29,7 @@ foreach($topics as $topic ){ ?>
             </div>
     </div>
     <div class="uk-margin">
-        <button class="uk-button uk-button-primary" type="submit">Ajouter un nouveau topic</button>
+        <button class="uk-button uk-button-primary" name="submit" type="submit">Ajouter un nouveau topic</button>
     </div>
 </form>    
 
