@@ -24,47 +24,57 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id_category` int NOT NULL AUTO_INCREMENT,
   `nameCategory` varchar(200) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.category : ~0 rows (environ)
+-- Listage des données de la table forum.category : ~5 rows (environ)
 INSERT INTO `category` (`id_category`, `nameCategory`) VALUES
-	(1, 'film');
+	(1, 'film'),
+	(2, 'histoire'),
+	(3, 'nouvelle categorie'),
+	(4, 'Goego'),
+	(5, 'kenza');
 
 -- Listage de la structure de table forum. post
 CREATE TABLE IF NOT EXISTS `post` (
   `id_post` int NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
-  `creationDate` date NOT NULL,
-  `user_id` int NOT NULL,
-  `topic_id` int NOT NULL,
+  `creationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int DEFAULT NULL,
+  `topic_id` int DEFAULT NULL,
   PRIMARY KEY (`id_post`) USING BTREE,
   KEY `id_topic` (`topic_id`) USING BTREE,
   KEY `id_users` (`user_id`) USING BTREE,
   CONSTRAINT `FK_message_topic` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id_topic`),
   CONSTRAINT `FK_message_users` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.post : ~1 rows (environ)
+-- Listage des données de la table forum.post : ~4 rows (environ)
 INSERT INTO `post` (`id_post`, `content`, `creationDate`, `user_id`, `topic_id`) VALUES
-	(1, 'voici tous les films bjdygfsreqgfljy', '2024-07-08', 1, 1);
+	(11, 'un jour....................', '2024-07-10 11:58:07', NULL, 6),
+	(12, 'kkkkkkkkkkkkkkkkkkkkkkk', '2024-07-10 13:29:22', NULL, 7),
+	(13, 'kkkkkkkkkkkkkkkkkkkk', '2024-07-10 13:29:38', NULL, 8),
+	(14, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2024-07-10 13:44:37', NULL, 9);
 
 -- Listage de la structure de table forum. topic
 CREATE TABLE IF NOT EXISTS `topic` (
   `id_topic` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL DEFAULT '0',
-  `creationDate` date NOT NULL,
-  `user_id` int NOT NULL,
-  `category_id` int NOT NULL,
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `creationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int DEFAULT NULL,
+  `category_id` int DEFAULT NULL,
   PRIMARY KEY (`id_topic`),
   KEY `users_id` (`user_id`) USING BTREE,
   KEY `FK_topic_category` (`category_id`),
   CONSTRAINT `FK_topic_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`),
   CONSTRAINT `FK_topic_users` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.topic : ~0 rows (environ)
+-- Listage des données de la table forum.topic : ~4 rows (environ)
 INSERT INTO `topic` (`id_topic`, `title`, `creationDate`, `user_id`, `category_id`) VALUES
-	(1, 'film des année 90', '2024-07-08', 1, 1);
+	(6, 'histoire du moyen age ', '2024-07-10 11:58:07', 1, 2),
+	(7, 'kkkkkkkkkkkkkkkkk', '2024-07-10 13:29:22', 1, 2),
+	(8, 'k', '2024-07-10 13:29:38', 1, 4),
+	(9, 'kenzaaaa', '2024-07-10 13:44:37', 1, 5);
 
 -- Listage de la structure de table forum. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -77,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum.user : ~0 rows (environ)
+-- Listage des données de la table forum.user : ~1 rows (environ)
 INSERT INTO `user` (`id_user`, `email`, `nickName`, `password`, `dateRegistration`, `role`) VALUES
 	(1, 'kenza@gmail.com', 'kenza', 'soleil', '2024-07-08', '0');
 
