@@ -9,14 +9,14 @@
 <h1>Liste post par topic</h1>
 
 
-<p>title : <?= $topic->getTitle() ?>
-</p>
+<p>title : <?= $topic->getTitle() ?></p>
+
 
 
 <p>Post :
 <?php if(!empty($posts)):?>
     <?php foreach($posts as $post): ?>
-        <?= $post->getContent() ?>
+        <?= $post->getContent() ?><br>
         <?php endforeach; ?>
     <?php else: ?>
         Aucun post disponible.
