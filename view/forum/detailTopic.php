@@ -16,7 +16,7 @@
 <p>Post :
 <?php if(!empty($posts)):?>
     <?php foreach($posts as $post): ?>
-        <?= $post->getContent() ?><br>
+        <?= $post->getContent() ?><a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">Supprimer</a><br>
         <?php endforeach; ?>
     <?php else: ?>
         Aucun post disponible.

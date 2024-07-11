@@ -248,5 +248,20 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     }
     }
+    // Méthode pour supprimer un post
+    public function deletePost($id) {
+        $postManager = new PostManager();
+       
+        // Récupère le post à supprimer
+        $posts = $postManager->findOneById($id);
+
+        // Supprime le post
+        $postManager->delete($id);
+        Session::addFlash("success", "Le post a été supprimé avec succès.");
+
+        $this->redirectTo("forum", 'listTopic');
+        Session::addFlash("error", "Le post n'a pas été supprimé. ");
+    }
+
     
 }
