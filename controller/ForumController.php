@@ -107,12 +107,12 @@ class ForumController extends AbstractController implements ControllerInterface{
         //  Pour vérifier
         //  var_dump($title);
 
-         // récupére tous les topics d'une catégorie spécifique (par son id)
+         // récupère tous les topics d'une catégorie spécifique (par son id)
          $topics = $topicManager->findTopicsByCategory($id);
         //  var_dump($topicId);
         //  $topicId = $topic->getId();
 
-         // récupére les catégories spécifique (par son id)
+         // récupère les catégories spécifique (par son id)
          $category = $categoryManager->findOneById($id);
          $categoryId = $category->getId();
         //  var_dump($categoryId);
