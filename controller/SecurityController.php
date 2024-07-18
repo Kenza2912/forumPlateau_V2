@@ -29,13 +29,13 @@ class SecurityController extends AbstractController{
                         //on hash le password (password_hash)
                         $passwordHash = password_hash($pass1, PASSWORD_DEFAULT);
                         // var_dump($passwordHash);
-                        //on ajoute l'user en bdd (pas besoin d'id car autoincrement)
+                        //on ajoute l'user a la base de données 
                         $userManager->add(["nickName" => $nickName, "email" =>$email, "password" => $passwordHash, "role"=>json_encode('ROLE_USER')]);
 
                      
                         Session::addFlash('success', 'Session créée!');
 
-                        //on redirige vers le formulaire de login dans la foulée
+                        //on redirige vers le formulaire de login 
                         $this->redirectTo('security', 'login');
                     } else {                                
                         
@@ -69,16 +69,15 @@ class SecurityController extends AbstractController{
             $user= $userManager->findOneByEmail($email);
             if($email && $password){
             //on recherche le mot de passe associé à l'adresse mail
-                // $user = $userManager->findPassword($email);
+             
 
                 if($user){
 
                     //récupération du mot de passe de l'utilisateur
                     $hash = $user->getPassword();
-                    //on recherche l'utilisateur rattaché à l'adresse mail
-                    // $user = $userManager->findOneByEmail($email);
+                   
 
-                    //on vérifie que les mots de passe concordent (password_verify)
+                    //on vérifie que les mots de passe  coïncide a l'aide de la fonction (password_verify)
                     if(password_verify($password, $hash)){
 
                         //on stocke l'user en Session (setUser dans App\Session)
@@ -107,7 +106,17 @@ class SecurityController extends AbstractController{
                 "view" => VIEW_DIR."security/login.php", 
         ];
     }
-    public function logout () {}
+    public function logout () {
+        if(isset($_SESSION["user"])){
+
+            unset($_SESSION['user']);
+            Session::addFlash('error', 'Vous êtes déconnecté.');
+
+            $this->redirectTo('forum');
+            
+                
+        }
+    }
 
 
 
