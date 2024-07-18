@@ -28,7 +28,7 @@ class PostManager extends Manager{
         );
     }
 
-    public function updatePost($id, $content){
+    public function update($id, $content){
         // var_dump($id);
         // var_dump($content); die;
         $sql = "UPDATE post
@@ -41,16 +41,35 @@ class PostManager extends Manager{
         ]);
         
     }
-    // public function listPostsByUser($id){
+
+    //    method to update the textcontent of a post
+    //    public function update($postId, $content){
+
+       
+    //     $sql = "UPDATE ". $this->tableName . "p
+    //             SET p.content = :content
+    //             WHERE p.id_post = :id";
+      
+    //     $data =[
+    //         'content' => $content,
+    //         'id' => $postId
+    //     ];
+    //     // var_dump($data); die();
+        
+    //     DAO::update($sql, $data);
+
+
+    // }
+    public function listPostsByUser($id){
             
         
 
-    //     $sql = "SELECT * FROM ". $this->tableName." WHERE user_id = :id ORDER BY creationDate DESC";
+        $sql = "SELECT * FROM ". $this->tableName." WHERE user_id = :id ORDER BY creationDate DESC";
         
-    //     return $this->getMultipleResults(
-    //         DAO::select($sql, ["id"=>$id]),
-    //         $this->className
-    //     );
-    // }
+        return $this->getMultipleResults(
+            DAO::select($sql, ["id"=>$id]),
+            $this->className
+        );
+    }
 
 }

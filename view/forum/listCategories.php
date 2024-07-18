@@ -7,8 +7,19 @@
 <?php
 foreach($categories as $category ){ ?>
     <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getNameCategory() ?></a></p>
-<?php }
-    ?>
+
+    <?php
+            if(isset($_SESSION['user'])){?>
+           
+            
+                <button><a href="index.php?ctrl=category&action=deleteCategory&id=<?= $category->getId() ?>">Supprimer</a></button>
+          
+
+           
+        
+            
+            
+<?php }} ?>
 
 
 

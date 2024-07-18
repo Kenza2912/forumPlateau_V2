@@ -263,22 +263,85 @@ class ForumController extends AbstractController implements ControllerInterface{
         Session::addFlash("error", "Le post n'a pas été supprimé. ");
     }
 
-    // public function listTopicsAndPostsByUser($id){
+     // Méthode pour supprimer une catégorie
+    public function deleteCategory($id){
 
-    //     $topicManager = new TopicManager;
-    //     $postManager = new PostManager;
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->findOneById($id);
+
+        $this->restrictTo('ROLE_USER');
+           // Supprime la categorie
+        $categoryManager->delete($id);
+        Session::addFlash("success", "La catégorie a été supprimée avec succès.");
+
+        $this->redirectTo("forum", 'listCategories');
+        Session::addFlash("error", "La catégorie n'a pas été supprimée. ");
+    }
+
+
+
+
+    public function listTopicsAndPostsByUser($id){
+
+        $topicManager = new TopicManager;
+        $postManager = new PostManager;
         
         
         
-    //     return [
-    //         "view" => VIEW_DIR."forum/listTopicsAndPostsUser.php",
-    //         "data" => [
-    //             "topics" => $topicManager->listTopicsByUser($id),
-    //             "posts" =>$postManager->listPostsByUser($id)
+        return [
+            "view" => VIEW_DIR."forum/listTopicsAndPostsUser.php",
+            "data" => [
+                "topics" => $topicManager->listTopicsByUser($id),
+                "posts" =>$postManager->listPostsByUser($id)
                 
-    //             ]
-    //     ];
-    // }
+                ]
+        ];
+    }
+
+    public function updatePostForm($postId){
+            
+       
+        $postManager = new PostManager();
+
+    
+        $post = $postManager->findOneById($postId);
+
+        
+        return [
+
+            "view" => VIEW_DIR."forum/updatePost.php",
+            "meta_description" => "Modifier un post : ",
+            "data" => [
+                "post" => $post
+            ]
+
+        ];
+
+    }
+    public function updatePost($postId){
+
+        
+        $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+       
+        $postManager = new PostManager();
+        
+      
+        $data = [
+            'content' => $content,
+            'id_post' => $postId
+        ];
+
+   
+        $postManager->update($postId, $content);
+        // var_dump($postManager);
+      
+        Session::addFlash('success', 'Le post a été modifié');
+
+       
+        $this->redirectTo('forum', 'listCategories'); 
+
+    }
 
    
 

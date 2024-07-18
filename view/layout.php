@@ -26,6 +26,8 @@
                             if(App\Session::isAdmin()){
                                 ?>
                                 <a href="index.php?ctrl=home&action=Users">Voir la liste des gens</a>
+                                
+                                <!-- <a href="index.php?ctrl=category&action=listCategories" class="nav-item">Categories</a> -->
                             <?php } ?>
                         </div>
                         <div id="nav-right">
@@ -34,6 +36,7 @@
                             if(App\Session::getUser()){
                                 ?>
                                 <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
+                                <a href="index.php?ctrl=forum&action=findAllTopics">Topics</a>
                                 <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 <?php
                             }

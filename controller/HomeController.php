@@ -11,12 +11,13 @@ use Model\Managers\CategoryManager;
 class HomeController extends AbstractController implements ControllerInterface {
 
     public function index(){
-        $topicManager = new TopicManager();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->findAll(["title", "DESC"]);
         return [
             "view" => VIEW_DIR."home.php",
             "meta_description" => "Page d'accueil du forum",
             "data" => [
-                    "topics" => $topicManager->findAll(['creationDate', 'DESC'])
+                    'categories' =>$categories
                 ]
         ];
     }
