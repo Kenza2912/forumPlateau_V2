@@ -11,14 +11,9 @@ use Model\Managers\CategoryManager;
 class HomeController extends AbstractController implements ControllerInterface {
 
     public function index(){
-        $categoryManager = new CategoryManager();
-        $categories = $categoryManager->findAll(["title", "DESC"]);
         return [
             "view" => VIEW_DIR."home.php",
-            "meta_description" => "Page d'accueil du forum",
-            "data" => [
-                    'categories' =>$categories
-                ]
+            "meta_description" => "Page d'accueil du forum"
         ];
     }
         

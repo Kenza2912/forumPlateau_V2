@@ -1,7 +1,7 @@
 <?php
 
 $post = $result['data']['post'];
-$title = "Edit Post | DiveIn Design - Your Web Design Forum";
+$title = "";
 
 ?>
 
@@ -15,7 +15,7 @@ $title = "Edit Post | DiveIn Design - Your Web Design Forum";
 
             <textarea  rows="10" name="content"  placeholder="Content"><?=$post->getContent()?></textarea>
             
-            <button type="submit" class="btn">Update</button>
+            <button type="submit">Update</button>
 
         </form>
 

@@ -1,5 +1,5 @@
 <?php
-    $topics = $result['data']['topics'];
+    // $topics = $result['data']['topics'];
     $user = App\Session::getUser();
 
 ?>
