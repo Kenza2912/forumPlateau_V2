@@ -35,5 +35,14 @@ class UserManager extends Manager{
             DAO::select($sql, ['email' => $email], false),
             $this->className
         );
-}
+    }
+    public function findOneByUser($user){
+
+        $sql = "SELECT * FROM ".$this->tableName." WHERE nickName = :nickName";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['nickName' => $user], false), 
+            $this->className
+        );
+    }
 }

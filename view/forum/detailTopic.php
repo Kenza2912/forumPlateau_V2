@@ -16,8 +16,13 @@
 <p>Post :
 <?php if(!empty($posts)):?>
     <?php foreach($posts as $post): ?>
+        <!-- si l'auteur du post correpond au user en session  -->
+       <?php  if(App\SESSION::getUser()==$post->getUser()){?>
+
+       
         <?= $post->getContent() ?><a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">Supprimer</a><br>
-        <?php endforeach; ?>
+        
+        <?php } endforeach; ?>
     <?php else: ?>
         Aucun post disponible.
     <?php endif; ?>

@@ -118,7 +118,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         //  var_dump($categoryId);
  
         //  var_dump($creationDate);
-         $userId =1;
+         $userId = Session::getUser()->getId();
 
         // vérifier si chaque variable contient une valeur jugée positive par PHP
         if($title){
@@ -209,7 +209,7 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         // vérifier si chaque variable contient une valeur jugée positive par PHP
         // $topicId = $topicManager->add($data);
-        $userId =1;
+        $userId =Session::getUser()->getId();
         if($content){
 
             $data = [
@@ -226,7 +226,7 @@ class ForumController extends AbstractController implements ControllerInterface{
          // Affiche un message de succès
          Session::addFlash("success", "Le post a été rajouté avec succès.");
          // Redirige vers la liste des topics
-         $this->redirectTo('forum/detailTopic');
+         $this->redirectTo('forum', 'listCategories'); 
 
 
     }
@@ -262,6 +262,25 @@ class ForumController extends AbstractController implements ControllerInterface{
         $this->redirectTo("forum", 'listTopic');
         Session::addFlash("error", "Le post n'a pas été supprimé. ");
     }
+
+    // public function listTopicsAndPostsByUser($id){
+
+    //     $topicManager = new TopicManager;
+    //     $postManager = new PostManager;
+        
+        
+        
+    //     return [
+    //         "view" => VIEW_DIR."forum/listTopicsAndPostsUser.php",
+    //         "data" => [
+    //             "topics" => $topicManager->listTopicsByUser($id),
+    //             "posts" =>$postManager->listPostsByUser($id)
+                
+    //             ]
+    //     ];
+    // }
+
+   
 
     
 }
