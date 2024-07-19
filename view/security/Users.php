@@ -10,7 +10,7 @@
         <p>Email : <?= $user->getemail()?></p>
        
 
-        <button><a href="index.php?ctrl=user&action=listTopicsAndPostsByUser&id=<?= $user->getId()?>">See topics and posts</a></button>
+        <button><a href="index.php?ctrl=forum&action=listTopicsAndPostsByUser&id=<?= $user->getId()?>">Les topics et les posts</a></button>
 <?php
         
     }

@@ -17,7 +17,7 @@
 <?php if(!empty($posts)):?>
     <?php foreach($posts as $post): ?>
         <!-- si l'auteur du post correpond au user en session  -->
-        Post :<?= $post->getContent() ?> <br>
+        Post :<?= $post->getContent() ?>
        <?php  if(App\SESSION::getUser()==$post->getUser()){?>
 
         <a href="index.php?ctrl=forum&action=updatePostForm&id=<?=$post->getId()?>">Modifier</a>

@@ -1,6 +1,7 @@
 <?php
     $category = $result["data"]['category']; 
-    $topics = $result["data"]['topics']; 
+    $topics = $result["data"]['topics'];
+    // $posts = $result["data"]['posts']; 
     
     
 ?>
@@ -9,8 +10,14 @@
 
 <?php
 foreach($topics as $topic ){ ?>
-    <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>"><?=$topic->getTitle()?></a> par <?= $topic->getUser() ?></p>
-<?php } ?>
+
+ <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>"><?=$topic->getTitle()?></a> par <?= $topic->getUser() ?></p>
+
+    <?php if(App\SESSION::getUser()==$topic->getUser()) { 
+    ?>
+   
+    <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">Supprimer</a><br>
+<?php }} ?>
 
 
 

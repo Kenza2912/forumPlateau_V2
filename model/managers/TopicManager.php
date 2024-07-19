@@ -32,12 +32,22 @@ class TopicManager extends Manager{
 
         
 
-        $sql = "SELECT * FROM ". $this->tableName." WHERE user_id = :id ORDER BY creationDate DESC";
+        $sql = "SELECT * FROM ". $this->tableName." WHERE user_id = :id";
         
         return $this->getMultipleResults(
             DAO::select($sql, ["id"=>$id]),
             $this->className
         );
     }
+
+    public function deletePostTopic($id){
+
+        
+
+        $sql = "DELETE FROM post WHERE topic_id = :id";
+
+        DAO::delete($sql, ['id'=>$id]);
+    }
+
 
 }

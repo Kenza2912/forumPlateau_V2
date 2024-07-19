@@ -141,7 +141,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             'content' => $content,
  
            
-            // 'user_id' => $userId,
+            'user_id' => $userId,
             'topic_id' => $topicId,
             
 
@@ -264,19 +264,37 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
      // Méthode pour supprimer une catégorie
-    public function deleteCategory($id){
+    // public function deleteCategory($id){
 
-        $categoryManager = new CategoryManager();
-        $categories = $categoryManager->findOneById($id);
+    //     $categoryManager = new CategoryManager();
+    //     $categories = $categoryManager->findOneById($id);
 
-        $this->restrictTo('ROLE_USER');
-           // Supprime la categorie
-        $categoryManager->delete($id);
-        Session::addFlash("success", "La catégorie a été supprimée avec succès.");
+    //     $this->restrictTo('ROLE_USER');
+    //        // Supprime la categorie
+    //     $categoryManager->delete($id);
+    //     Session::addFlash("success", "La catégorie a été supprimée avec succès.");
 
-        $this->redirectTo("forum", 'listCategories');
-        Session::addFlash("error", "La catégorie n'a pas été supprimée. ");
+    //     $this->redirectTo("forum", 'listCategories');
+    //     Session::addFlash("error", "La catégorie n'a pas été supprimée. ");
+    // }
+
+    
+
+     public function deleteTopic($id){
+
+        $topicManager = new TopicManager();
+
+        $topicManager->deletePostTopic($id);
+        $topicManager->delete($id);
+
+       
+        Session::addFlash('error', "Le topic a été supprimé avec succès.");
+
+        $this->redirectTo("forum", 'listTopic');
+        Session::addFlash("error", "Le topic n'a pas été supprimé. ");
     }
+
+
 
 
 
@@ -340,6 +358,27 @@ class ForumController extends AbstractController implements ControllerInterface{
 
        
         $this->redirectTo('forum', 'listCategories'); 
+
+    }
+
+
+    public function userProfile($id){
+
+       
+        $topicManager = new TopicManager;
+        $postManager = new PostManager;
+        
+        $topics = $topicManager->listTopicsByUser($id);
+        $posts = $postManager->listPostsByUser($id);
+
+        return [
+            "view" => VIEW_DIR."forum/profile.php",
+            "meta_description" => "Profil Utilisateur ",
+            "data" => [
+                "topics" => $topics,
+                "posts" => $posts
+            ]
+        ];
 
     }
 

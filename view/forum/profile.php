@@ -3,7 +3,7 @@
     $posts = $result['data']['posts'];
     
 ?>
-    <h2> Bienvenu sur votre profile <?=  App\Session::getUser()->getNickName() ?></h2>
+    <h2> Bienvenu sur votre profil <?=  App\Session::getUser()->getNickName() ?></h2>
   
 
     <h2>Vos topics :</h2>

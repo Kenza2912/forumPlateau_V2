@@ -9,17 +9,17 @@ foreach($categories as $category ){ ?>
     <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getNameCategory() ?></a></p>
 
     <?php
-            if(isset($_SESSION['user'])){?>
+            // if(isset($_SESSION['user'])){?>
            
             
-                <button><a href="index.php?ctrl=category&action=deleteCategory&id=<?= $category->getId() ?>">Supprimer</a></button>
+                <!-- <button><a href="index.php?ctrl=category&action=deleteCategory&id=<?= $category->getId() ?>">Supprimer</a></button> -->
           
 
            
         
             
             
-<?php }} ?>
+<?php } ?>
 
 
 
