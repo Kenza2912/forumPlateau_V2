@@ -119,9 +119,16 @@ class SecurityController extends AbstractController{
                 
         }
     }
-
-
-
-
-
 }
+
+
+
+    //    function delete user
+
+    //    faire fonction finds posts by user 
+
+    //    anonymiser ls post 
+
+    //    supprimer le user ( set clé étrangère nul) 
+    // }
+

@@ -135,15 +135,9 @@ final class User extends Entity{
     }
 
     public function hasRole($role){
-        if( $this->role == $role){
-            return true;
-
-    } else {
-
-            return false;
-
-    };
-    }
+        // on retourne donc si dans le tableau Json on trouve un role qui correspond au role envoyer en paramêtre alors on return true ;
+          return in_array($role,$this->getRole());
+        }
 
     public function __toString() {
         return $this->nickName;

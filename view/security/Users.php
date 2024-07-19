@@ -8,6 +8,7 @@
 ?>
         <p>Username :<b> <?= $user->getUsername()?></b></p>
         <p>Email : <?= $user->getemail()?></p>
+        <p>Date : <i><?= $user->getDateRegister()?></i></p>
        
 
         <button><a href="index.php?ctrl=forum&action=listTopicsAndPostsByUser&id=<?= $user->getId()?>">Les topics et les posts</a></button>

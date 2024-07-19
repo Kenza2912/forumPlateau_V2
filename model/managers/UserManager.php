@@ -45,4 +45,12 @@ class UserManager extends Manager{
             $this->className
         );
     }
+
+    public function deleteUser($id){
+        $sql = "DELETE FROM user WHERE id_user = :id";
+
+        DAO::delete($sql, ['id'=>$id]);
+    }
+
+
 }

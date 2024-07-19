@@ -382,6 +382,26 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     }
 
+    public function deleteUserAndTopic($userID){
+        
+        $userManger = new UserManager;
+        $topicManager = new TopicManager;
+        $postManager = new PostManager;
+
+
+        $topicManager->deletePostTopic($id);
+        $topicManager->delete($id);
+        $userManger->deleteUser($id);
+
+        $this->redirectTo("forum", 'listTopic');
+
+    }
+
+    
+
+
+
+
    
 
     
