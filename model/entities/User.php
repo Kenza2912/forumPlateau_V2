@@ -134,9 +134,16 @@ final class User extends Entity{
         return $this;
     }
 
+    // public function hasRole($role){
+    //     // on retourne donc si dans le tableau Json on trouve un role qui correspond au role envoyer en paramêtre alors on return true ;
+    //       return in_array($role,$this->getRole());
+    //     }
+
     public function hasRole($role){
-        // on retourne donc si dans le tableau Json on trouve un role qui correspond au role envoyer en paramêtre alors on return true ;
-          return in_array($role,$this->getRole());
+
+            $result = $this->getRole()== json_encode($role);
+            
+            return $result;
         }
 
     public function __toString() {

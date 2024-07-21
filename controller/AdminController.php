@@ -7,7 +7,7 @@
     use App\ControllerInterface;
     use Model\Managers\UserManager;
 
-    class adminController extends AbstractController implements ControllerInterface{
+    class AdminController extends AbstractController implements ControllerInterface{
 
         public function index(){
 
@@ -23,8 +23,9 @@
             $users =  $userManager->findAll(['dateRegistration', 'DESC']);
 
             return [
-                "metaDescription" => "Users List",
-                "view" => VIEW_DIR."security/Users.php",
+                
+                "view" => VIEW_DIR."security/users.php",
+                "metaDescription" => "liste des utilisateurs",
                 "data" => [
                     "users" => $users
                 ]
