@@ -263,20 +263,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         Session::addFlash("error", "Le post n'a pas été supprimé. ");
     }
 
-     // Méthode pour supprimer une catégorie
-    // public function deleteCategory($id){
-
-    //     $categoryManager = new CategoryManager();
-    //     $categories = $categoryManager->findOneById($id);
-
-    //     $this->restrictTo('ROLE_USER');
-    //        // Supprime la categorie
-    //     $categoryManager->delete($id);
-    //     Session::addFlash("success", "La catégorie a été supprimée avec succès.");
-
-    //     $this->redirectTo("forum", 'listCategories');
-    //     Session::addFlash("error", "La catégorie n'a pas été supprimée. ");
-    // }
+    
 
     
 

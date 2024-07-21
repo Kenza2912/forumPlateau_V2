@@ -42,24 +42,7 @@ class PostManager extends Manager{
         
     }
 
-    //    method to update the textcontent of a post
-    //    public function update($postId, $content){
-
-       
-    //     $sql = "UPDATE ". $this->tableName . "p
-    //             SET p.content = :content
-    //             WHERE p.id_post = :id";
-      
-    //     $data =[
-    //         'content' => $content,
-    //         'id' => $postId
-    //     ];
-    //     // var_dump($data); die();
-        
-    //     DAO::update($sql, $data);
-
-
-    // }
+ 
     public function listPostsByUser($id){
             
         
@@ -71,5 +54,27 @@ class PostManager extends Manager{
             $this->className
         );
     }
+
+    // Récupérer les posts par utilisateur
+    public function findPostsByUser($userId) {
+        $sql = "SELECT * FROM ".$this->tableName." WHERE user_id = :user_id";
+
+        return $this->getMultipleResults(
+            DAO::select($sql, ['user_id' => $userId]),
+            $this->className
+        );
+    }
+
+    public function anonymizePostsByUser($userId) {
+        $sql = "UPDATE ".$this->tableName." 
+                SET content = 'Anonyme',
+                    user_id = NULL
+                WHERE user_id = :user_id";
+        return DAO::update($sql, ['user_id' => $userId]);
+    }
+
+    
+
+
 
 }

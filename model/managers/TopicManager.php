@@ -48,12 +48,11 @@ class TopicManager extends Manager{
     }
 
 
-    // Méthode pour supprimer les topics crées par le user
-    // public function deleteTopicByUser($userId){
-
-    //     $sql = "DELETE FROM topic WHERE topic_id = :id";
-
-    // }
+    public function deleteTopicsByUser($userId) {
+        // Supprimer les topics créés par l'utilisateur
+        $sql = "DELETE FROM ".$this->tableName." WHERE user_id = :user_id";
+        DAO::delete($sql, ['user_id' => $userId]);
+    }
 
 
 }

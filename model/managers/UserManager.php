@@ -46,10 +46,31 @@ class UserManager extends Manager{
         );
     }
 
-    public function deleteUser($id){
-        $sql = "DELETE FROM user WHERE id_user = :id";
+    // public function deleteUser($id){
+    //     $sql = "DELETE FROM user WHERE id_user = :id";
 
-        DAO::delete($sql, ['id'=>$id]);
+    //     DAO::delete($sql, ['id'=>$id]);
+    // }
+
+    public function anonymizeUser($userId) {
+        // Anonymiser les informations personnelles
+        $sql = "UPDATE ".$this->tableName."
+                SET email = 'anonymous@example.com',
+                    nickName = 'Anonymous'
+                WHERE id_user = :id";
+    
+        return DAO::update($sql, ['id' => $userId]);
+    }
+
+    public function deleteUser($userId) {
+        $this->anonymizeUser($userId); // Anonymiser l'utilisateur d'abord
+        $postManager = new PostManager();
+        $postManager->anonymizePostsByUser($userId); // Anonymiser les posts associés
+        $topicManager = new TopicManager();
+        $topicManager->deleteTopicsByUser($userId); // Supprimer les topics associés
+        // Supprimer l'utilisateur de la base de données
+        $sql = "DELETE FROM ".$this->tableName." WHERE id_user = :id";
+        DAO::delete($sql, ['id' => $userId]);
     }
 
 

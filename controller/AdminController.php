@@ -25,12 +25,14 @@
             return [
                 
                 "view" => VIEW_DIR."security/users.php",
-                "metaDescription" => "liste des utilisateurs",
+                "meta_description" =>"liste des utilisateurs",
                 "data" => [
                     "users" => $users
                 ]
             ];
         }
+
+    
 
     
     }

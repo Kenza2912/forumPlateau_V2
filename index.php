@@ -16,6 +16,11 @@ Autoloader::register();
 
 //démarre une session ou récupère la session actuelle
 session_start();
+
+// Génération du token CSRF
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 //et on intègre la classe Session qui prend la main sur les messages en session
 use App\Session as Session;
 
