@@ -19,38 +19,43 @@
                 <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
                 <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
                 <header>
-                    <nav>
-                        <div id="nav-left">
-                            <a href="/">Accueil</a>
-                            <?php
-                            if(App\Session::isAdmin()){
-                                ?>
-                                <a href="index.php?ctrl=admin&action=listUsers">Voir la liste des gens</a>
-                                
-                                <!-- <a href="index.php?ctrl=category&action=listCategories" class="nav-item">Categories</a> -->
-                            <?php } ?>
-                        </div>
-                        <div id="nav-right">
-                        <?php
-                            // si l'utilisateur est connecté 
-                            if(App\Session::getUser()){
-                                ?>
-                                
-                                <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                                <a href="index.php?ctrl=forum&action=findAllTopics">Catégorie</a>
-                                <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                    <nav class="uk-navbar-container" uk-navbar>
+                        <div class="uk-navbar-left">
+                            <div id="nav-left">
+                                <ul class="uk-navbar-nav">
+                                <li><a href="/">Accueil</a></li>
                                 <?php
-                            }
-                            else{
-                                ?>
-                                <a href="index.php?ctrl=security&action=login">Connexion</a>
-                                <a href="index.php?ctrl=security&action=register">Inscription</a>
-                                <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
+                                if(App\Session::isAdmin()){
+                                    ?>
+                                    <li><a href="index.php?ctrl=admin&action=listUsers">Voir la liste des gens</a></li>
+                                    
+                                    <!-- <a href="index.php?ctrl=category&action=listCategories" class="nav-item">Categories</a> -->
+                                <?php } ?>
+                            
+                            
+                                    
                             <?php
-                            }
-                        ?>
-                        </div>
-                    </nav>
+                                // si l'utilisateur est connecté 
+                                if(App\Session::getUser()){
+                                    ?>
+                                    
+                                    <li><a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></li>
+                                    <li><a href="index.php?ctrl=forum&action=findAllTopics">Catégorie</a></li>
+                                    <li><a href="index.php?ctrl=security&action=logout">Déconnexion</a></li>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <li><a href="index.php?ctrl=security&action=login">Connexion</a></li>
+                                    <li><a href="index.php?ctrl=security&action=register">Inscription</a></li>
+                                    <li><a href="index.php?ctrl=forum&action=index">Liste des catégories</a></li>
+                                <?php
+                                }
+                            ?>
+                       
+                                </ul>
+                            </div>
+                        </nav>
                 </header>
                 
                 <main id="forum">

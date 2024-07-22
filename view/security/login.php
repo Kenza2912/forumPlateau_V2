@@ -13,3 +13,6 @@
 
     <input type="submit" name="submit"values="Se connecter">
 </form>
+
+<!-- <a href="index.php?ctrl=security&action=login">Se connecter</a>
+<a href="index.php?ctrl=security&action=register">S'inscrire</a> -->

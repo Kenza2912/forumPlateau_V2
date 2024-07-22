@@ -15,7 +15,7 @@ $title = "";
 
             <textarea  rows="10" name="content"  placeholder="Content"><?=$post->getContent()?></textarea>
             
-            <button type="submit">Update</button>
+            <button type="submit">modifier</button>
 
         </form>
 
