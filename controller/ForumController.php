@@ -45,41 +45,66 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
       // méthode pour rajouter une catégorie à ma base de données
-      public function addCategory(){
-
-        // Vérifie si le formulaire a été soumis
-        if (isset($_POST['submit'])) { 
-
-        // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres. FILTER_SANITIZE_SPECIAL_CHARS permet d'afficher la chaîne en toute sécurité dans un contexte HTML sans exécuter de code malveillant inséré par un utilisateur.
-        $nameCategory = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
-
-        // Création de l'instance de CategoryManager
-        $categoryManager = new CategoryManager();
-
-        // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
-        $categories = $categoryManager->findAll(["nameCategory", "DESC"]);
-
-        // vérifier si chaque variable contient une valeur jugée positive par PHP
-        if($nameCategory){
-
-            // on construit pour chaque valeur un tableau associatif $data : 
-            $data = [
-                'nameCategory' => $nameCategory
-            ];
-
-            //  on enregistrer ce produit nouvellement créé en session à l'aide de la fonction add dans Manager.php
-            $categoryManager->add($data);
-
-            // Affiche un message de succès
-            Session::addFlash("success", "La catégorie a été rajoutée avec succès.");
-            // Redirige vers la liste des topics
-            $this->redirectTo('forum/listTopics');
+      public function addCategory() {
+        if (isset($_POST['submit'])) {
+            $nameCategory = filter_input(INPUT_POST, 'nameCategory', FILTER_SANITIZE_SPECIAL_CHARS);
+            $categoryManager = new CategoryManager();
+    
+            if ($nameCategory) {
+                if (isset($_FILES['affiche']) && $_FILES['affiche']['error'] == UPLOAD_ERR_OK) {
+                    $affiche = $_FILES['affiche'];
+    
+                    // Vérification de la taille du fichier
+                    $maxFileSize = 2 * 1024 * 1024; // 2 MB
+                    if ($affiche['size'] > $maxFileSize) {
+                        Session::addFlash("error", "Le fichier est trop volumineux. La taille maximale autorisée est de 2 Mo.");
+                        return;
+                    }
+    
+                    // Vérification du type MIME
+                    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    $fileType = mime_content_type($affiche['tmp_name']);
+                    if (!in_array($fileType, $allowedTypes)) {
+                        Session::addFlash("error", "Seuls les fichiers JPG, PNG et GIF sont autorisés.");
+                        return;
+                    }
+    
+                    // Vérification de l'extension
+                    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                    $fileExtension = strtolower(pathinfo($affiche['name'], PATHINFO_EXTENSION));
+                    if (!in_array($fileExtension, $allowedExtensions)) {
+                        Session::addFlash("error", "Extension de fichier non autorisée.");
+                        return;
+                    }
+    
+                    // Génération d'un nom de fichier unique
+                    $imageName = uniqid() . '_' . basename($affiche['name']);
+                    $uploadDir = './public/image/';
+                    $uploadFile = $uploadDir . $imageName;
+    
+                    // Déplacement du fichier téléchargé
+                    if (move_uploaded_file($affiche['tmp_name'], $uploadFile)) {
+                        chmod($uploadFile, 0644); // Restreindre les permissions du fichier
+                        $data = [
+                            'nameCategory' => $nameCategory,
+                            'affiche' => $imageName
+                        ];
+                        $categoryManager->add($data);
+                        Session::addFlash("success", "La catégorie a été rajoutée avec succès.");
+                        $this->redirectTo('forum/listCategories');
+                    } else {
+                        Session::addFlash("error", "Erreur lors du téléchargement de l'image.");
+                    }
+                } else {
+                    Session::addFlash("error", "Veuillez sélectionner une image valide.");
+                }
+            } else {
+                Session::addFlash("error", "Veuillez entrer un nom de catégorie valide.");
+            }
         }
-        // Affiche un message de d'erreur
-        Session::addFlash("error", "La catégorie n'a pas été rajoutée ");
-
-      
-        // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
+    
+        $categories = $categoryManager->findAll(["nameCategory", "DESC"]);
+    
         return [
             "view" => VIEW_DIR."forum/listCategories.php",
             "meta_description" => "Ajouter une catégorie : ",
@@ -88,7 +113,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-    }
+
+
 
     // méthode pour rajouter un topic à la base de données
     public function addTopicByCategory($id){

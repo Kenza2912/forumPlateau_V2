@@ -19,11 +19,11 @@
                 <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
                 <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
                 <header>
-                    <nav class="uk-navbar-container" uk-navbar>
+                    <nav class="uk-margin">
                         <div class="uk-navbar-left">
                             <div id="nav-left">
-                                <ul class="uk-navbar-nav">
-                                <li><a href="/">Accueil</a></li>
+                                <ul class="uk-subnav uk-subnav-pill uk-flex-center" uk-margin>
+                                <li><a class="uk-button uk-button-default" href="/">Accueil</a></li>
                                 <?php
                                 if(App\Session::isAdmin()){
                                     ?>
@@ -39,16 +39,16 @@
                                 if(App\Session::getUser()){
                                     ?>
                                     
-                                    <li><a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></li>
-                                    <li><a href="index.php?ctrl=forum&action=findAllTopics">Catégorie</a></li>
-                                    <li><a href="index.php?ctrl=security&action=logout">Déconnexion</a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId()?>"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=forum&action=findAllTopics">Catégorie</a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=security&action=logout">Déconnexion</a></li>
                                     <?php
                                 }
                                 else{
                                     ?>
-                                    <li><a href="index.php?ctrl=security&action=login">Connexion</a></li>
-                                    <li><a href="index.php?ctrl=security&action=register">Inscription</a></li>
-                                    <li><a href="index.php?ctrl=forum&action=index">Liste des catégories</a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=security&action=login">Connexion</a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=security&action=register">Inscription</a></li>
+                                    <li><a class="uk-button uk-button-default" href="index.php?ctrl=forum&action=index">Liste des catégories</a></li>
                                 <?php
                                 }
                             ?>
@@ -58,11 +58,11 @@
                         </nav>
                 </header>
                 
-                <main id="forum">
+                <main id="forum" class="uk-container uk-margin-large-top">
                     <?= $page ?>
                 </main>
             </div>
-            <footer>
+            <footer  class="uk-background-secondary uk-light uk-padding uk-text-center">
                 <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions légales</a></p>
             </footer>
         </div>
