@@ -123,24 +123,8 @@ class SecurityController extends AbstractController{
     }
 
     public function deleteUser($userId) {
-        // $userManager = new UserManager();
-        // $postManager = new PostManager();
-
-        // // Anonymiser les posts
-        // $postManager->anonymizePostsByUser($userId);
-
-        // // Supprimer l'utilisateur
-        // $userManager->deleteUser($userId);
-
-        // // Redirection ou message de confirmation
-        // return [
-        //     "view" => VIEW_DIR."security/users.php", 
-        //     "meta_description" => "Utilisateur supprimé et posts anonymisés",
-        //     "data" => [
-            
-        //         "users" => $users
-        //     ]
-        // ];
+       
+        
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validation du token CSRF
@@ -170,12 +154,5 @@ class SecurityController extends AbstractController{
 
 
 
-    //    function delete user ok
-
-    //    faire fonction finds posts by user 
-
-    //    anonymiser ls post 
-
-    //    supprimer le user ( set clé étrangère nul) 
-    // }
+    
 

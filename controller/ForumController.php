@@ -7,6 +7,7 @@ use App\ControllerInterface;
 use Model\Managers\CategoryManager;
 use Model\Managers\PostManager;
 use Model\Managers\TopicManager;
+use Model\Managers\UserManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -155,7 +156,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                     'user_id' => $userId,
                     'category_id' => $categoryId,
      
-                    // 'closed' => 0
+                    
 
                 ];
 
@@ -165,8 +166,6 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         $dataContent = [
             'content' => $content,
- 
-           
             'user_id' => $userId,
             'topic_id' => $topicId,
             
@@ -180,7 +179,7 @@ class ForumController extends AbstractController implements ControllerInterface{
          // Affiche un message de succès
          Session::addFlash("success", "Le topic a été rajouté avec succès.");
          // Redirige vers la liste des topics
-         $this->redirectTo('forum/listTopics');
+         $this->redirectTo('forum', 'profile.php'); 
 
 
         }
@@ -285,7 +284,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $postManager->delete($id);
         Session::addFlash("success", "Le post a été supprimé avec succès.");
 
-        $this->redirectTo("forum", 'listTopic');
+        $this->redirectTo('forum', 'listCategories'); 
         Session::addFlash("error", "Le post n'a pas été supprimé. ");
     }
 
@@ -296,14 +295,12 @@ class ForumController extends AbstractController implements ControllerInterface{
      public function deleteTopic($id){
 
         $topicManager = new TopicManager();
-
-        $topicManager->deletePostTopic($id);
         $topicManager->delete($id);
 
-       
         Session::addFlash('error', "Le topic a été supprimé avec succès.");
 
-        $this->redirectTo("forum", 'listTopic');
+        $this->redirectTo('forum', 'listCategories'); 
+      
         Session::addFlash("error", "Le topic n'a pas été supprimé. ");
     }
 
@@ -395,20 +392,29 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     }
 
-    public function deleteUserAndTopic($userID){
-        
-        $userManger = new UserManager;
+   
+
+    public function anonymizeAndDeleteUser($userId) {
+        $userManager = new UserManager;
         $topicManager = new TopicManager;
         $postManager = new PostManager;
-
-
-        $topicManager->deletePostTopic($id);
-        $topicManager->delete($id);
-        $userManger->deleteUser($id);
-
-        $this->redirectTo("forum", 'listTopic');
-
+    
+        // Anonymiser les posts de l'utilisateur
+        $postManager->anonymizePostsByUser($userId);
+    
+        // Anonymiser les topics de l'utilisateur
+        $topicManager->anonymizeTopicsByUser($userId);
+    
+        // Supprimer l'utilisateur
+        $userManager->deleteUser($userId);
+    
+     
+        Session::addFlash('success', 'L\'utilisateur a été anonymisé et supprimé.');
+    
+        
+        $this->redirectTo('forum/home');
     }
+    
 
    
 

@@ -62,13 +62,18 @@ class UserManager extends Manager{
         return DAO::update($sql, ['id' => $userId]);
     }
 
+    // public function deleteUser($userId) {
+    //     $this->anonymizeUser($userId); // Anonymiser l'utilisateur d'abord
+    //     $postManager = new PostManager();
+    //     $postManager->anonymizePostsByUser($userId); // Anonymiser les posts associés
+    //     $topicManager = new TopicManager();
+    //     $topicManager->deleteTopicsByUser($userId); // Supprimer les topics associés
+    //     // Supprimer l'utilisateur de la base de données
+    //     $sql = "DELETE FROM ".$this->tableName." WHERE id_user = :id";
+    //     DAO::delete($sql, ['id' => $userId]);
+    // }
+
     public function deleteUser($userId) {
-        $this->anonymizeUser($userId); // Anonymiser l'utilisateur d'abord
-        $postManager = new PostManager();
-        $postManager->anonymizePostsByUser($userId); // Anonymiser les posts associés
-        $topicManager = new TopicManager();
-        $topicManager->deleteTopicsByUser($userId); // Supprimer les topics associés
-        // Supprimer l'utilisateur de la base de données
         $sql = "DELETE FROM ".$this->tableName." WHERE id_user = :id";
         DAO::delete($sql, ['id' => $userId]);
     }

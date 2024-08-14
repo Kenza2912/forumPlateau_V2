@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="uk-margin">
-        <label class="uk-form-label" for="pass2">Confirmez le mot de passe</label>
+        <label class="uk-form-label" for="pass2">Confirmer le mot de passe</label>
         <div class="uk-form-controls">
             <input class="uk-input" id="pass2" name="pass2" type="password" required>
         </div>

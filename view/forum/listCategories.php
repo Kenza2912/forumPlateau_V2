@@ -36,10 +36,10 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="categoryImage">Image de la catégorie</label>
+        <label class="uk-form-label" for="affiche">Image de la catégorie</label>
         <div class="uk-form-controls">
             <div uk-form-custom="target: true">
-                <input type="file" id="categoryImage" name="categoryImage" required>
+                <input type="file" id="affiche" name="affiche" required>
                 <input class="uk-input uk-form-width-medium" type="text" placeholder="Choisir un fichier" disabled>
             </div>
         </div>

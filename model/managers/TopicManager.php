@@ -40,18 +40,19 @@ class TopicManager extends Manager{
         );
     }
 
-    public function deletePostTopic($id){       
-
-        $sql = "DELETE * FROM post WHERE topic_id = :id";
-
-        DAO::delete($sql, ['id'=>$id]);
-    }
+   
 
 
     public function deleteTopicsByUser($userId) {
         // Supprimer les topics créés par l'utilisateur
         $sql = "DELETE FROM ".$this->tableName." WHERE user_id = :user_id";
         DAO::delete($sql, ['user_id' => $userId]);
+    }
+
+    public function anonymizeTopicsByUser($userId) {
+        $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
+       
+        return DAO::update($sql, ['user_id' => $userId]);
     }
 
 

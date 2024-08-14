@@ -65,16 +65,14 @@ class PostManager extends Manager{
         );
     }
 
-    public function anonymizePostsByUser($userId) {
-        $sql = "UPDATE ".$this->tableName." 
-                SET content = 'Anonyme',
-                    user_id = NULL
-                WHERE user_id = :user_id";
-        return DAO::update($sql, ['user_id' => $userId]);
-    }
+   
 
     
-
+    public function anonymizePostsByUser($userId) {
+        $sql = "UPDATE ".$this->tableName." SET user_id = NULL WHERE user_id = :userId";
+        
+        return DAO::update($sql, ['user_id' => $userId]);
+    }
 
 
 }

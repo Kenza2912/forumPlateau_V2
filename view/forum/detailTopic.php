@@ -18,7 +18,13 @@
                               
                                 <div class="uk-width-expand">
                                     <h4 class="uk-comment-title uk-margin-remove">
-                                        <?= $post->getUser()->getNickName() ?>
+                                        <?=  $user = $post->getUser(); 
+                                        if ($user) {
+                                             htmlspecialchars($user);
+                                        } else {
+                                            echo "Utilisateur Supprimé"; 
+                                        }
+                                         ?>
                                     </h4>
                                     <p class="uk-comment-meta uk-margin-remove-top">Posté le <?= $post->getCreationDate() ?></p>
                                 </div>
