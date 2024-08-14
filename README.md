@@ -59,5 +59,19 @@ Lorsqu'un utilisateur supprime son compte, ses contributions (sujets et posts) r
 
 ## Aperçu Visuel
 
-### Page de Profil
-### Page des Sujets
+### Liste des Catégories 
+<div align="center">
+  <img src="./public/image/listCategories.png" alt="Liste des Catégories " width="800" />
+</div>
+
+### Liste des sujets
+
+<div align="center">
+  <img src="./public/image/listTopics.png" alt="Liste des sujets " width="800" />
+</div>
+
+### Détail du Sujet
+
+<div align="center">
+  <img src="./public/image/detail.png" alt="Détail du Sujet " width="800" />
+</div>
